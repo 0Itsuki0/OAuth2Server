@@ -2,7 +2,7 @@ import * as client from 'openid-client'
 import express, { Request, Response } from "express"
 import { REQUIRED_SCOPE } from './oauth.js'
 import puppeteer from 'puppeteer'
-import { CLIENT_CALLBACK_PATH, CLIENT_HOST, CLIENT_PORT, CLIENT_SECRET, CLINET_ID, PRIVATE_INFO_ENDPOINT, SERVER_HOST, SERVER_PORT } from './constants.js'
+import { CLIENT_CALLBACK_PATH, CLIENT_HOST, CLIENT_PORT, CLIENT_SECRET, CLINET_ID, PROTECTED_ENDPOINT, SERVER_HOST, SERVER_PORT } from './constants.js'
 
 
 let config: client.Configuration | undefined = undefined
@@ -102,7 +102,7 @@ async function getProtectedEndpoint(accessToken: string): Promise<{[key: string]
     if (!config) {
         throw new Error("initializeAuthClient is not initialized.")
     }
-    const response = await client.fetchProtectedResource(config, accessToken, new URL(`${SERVER_HOST}:${SERVER_PORT}${PRIVATE_INFO_ENDPOINT}`), "get")
+    const response = await client.fetchProtectedResource(config, accessToken, new URL(`${SERVER_HOST}:${SERVER_PORT}${PROTECTED_ENDPOINT}`), "get")
     if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}, ${response.statusText}`)
     }

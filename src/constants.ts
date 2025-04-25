@@ -13,7 +13,7 @@ export const OTHER_ERROR_ENDPOINT = "/error"
 export const REVOCATION_ENDPOINT = "/logout"
 
 // private endpoint under root "/"
-export const PRIVATE_INFO_ENDPOINT = "/me"
+export const PROTECTED_ENDPOINT = "/me"
 
 
 

@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express"
-import { authenticateMiddleware, getMetadataJson, handleGetAuthorize, handlePostTokenRevocation as handleGetRevoke, handleGetProtectedEndpoint as handleGetProtectedEndpoint, handlePostAuthorize, handlePostToken, REQUIRED_SCOPE, addDummyData, } from "./oauth.js"
+import { authenticateMiddleware, getMetadataJson, handleGetAuthorize, handlePostTokenRevocation, handleGetProtectedEndpoint, handlePostAuthorize, handlePostToken, REQUIRED_SCOPE, addDummyData, } from "./oauth.js"
 import { launchClient } from "./sampleClient.js"
-import { AUTHORIZE_ENDPOINT, OAUTH_ROUTER_ENDPOINT, OTHER_ERROR_ENDPOINT, PRIVATE_INFO_ENDPOINT as PROTECTED_ENDPOINT, REVOCATION_ENDPOINT, SERVER_PORT, TOKEN_ENDPOINT } from "./constants.js"
+import { AUTHORIZE_ENDPOINT, OAUTH_ROUTER_ENDPOINT, OTHER_ERROR_ENDPOINT, PROTECTED_ENDPOINT, REVOCATION_ENDPOINT, SERVER_PORT, TOKEN_ENDPOINT } from "./constants.js"
 
 
 
@@ -48,7 +48,7 @@ oauthRouter.post(TOKEN_ENDPOINT, async (req: Request, res: Response) => {
 })
 
 oauthRouter.post(REVOCATION_ENDPOINT, async (req: Request, res: Response) => {
-    handleGetRevoke(req, res)
+    handlePostTokenRevocation(req, res)
 })
 
 app.use(OAUTH_ROUTER_ENDPOINT, oauthRouter)
